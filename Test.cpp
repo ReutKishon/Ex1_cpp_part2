@@ -7,6 +7,5 @@ using namespace std;
 TEST_CASE("Test PhoneticFind -> Sanity")
 {
     CHECK(1 == 1);
-    CHECK(find(string("Dond vorri be haffy"), string("dont")).compare(string("Dond")) == 0);
+    CHECK(find(string("dont"), string("Dond vorri be haffy")).compare(string("Dond")) == 0);
 }
-

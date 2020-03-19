@@ -1,29 +1,74 @@
 #include "PhoneticFinder.hpp"
 #include <cctype>
 #include <string>
+#include <vector>
+#include <list>
+#include <iostream>
+#include <algorithm>
+#include<bits/stdc++.h> 
+
 using namespace std;
 
-string find(string word, string text){
+vector<list<char>> letter_groups = {
+    {'v', 'w'},
+    {'b', 'f', 'p'},
+    {'g', 'j'},
+    {'c', 'k', 'q'},
+    {'s', 'z'},
+    {'d', 't'},
+    {'o', 'u'},
+    {'i', 'y'}};
 
+bool are_letters_equal(char a, char b)
+{
 
+    if (a == b)
+    {
+        return true;
+    }
 
-    return string("hello");
+    if (tolower(a) == tolower(b))
+    {
+        return true;
+    }
 
+    for (auto &group : letter_groups)
+    {
+        // Check if iterator points to end or not
+        if (find(group.begin(), group.end(), a) != group.end() &&
+            find(group.begin(), group.end(), b) != group.end())
+        {
+            return true;
+        }
+    }
+
+    return false;
 }
 
-bool correct_letter(char a , char b){
+bool are_words_equal(string word1, string word2)
+{
+    if (word1.length() != word2.length())
+        return false;
+    for (auto i = 0; i < word1.length(); i++)
+    {
+        if (!are_letters_equal(word1[i], word2[i]))
+            return false;
+    }
+    return true;
+}
 
-// if(isupper(a)){
-//     if((char)tolower(a) == b){
-//         return true;
-//     }
-//     else
-//     {
-//         if()
-//     }
-    
-// }
-
-
-
+string find(string target_word, string text)
+{
+    // making a string stream 
+    stringstream words_stream(text); 
+    string word;
+    // Read and print each word. 
+    while (words_stream >> word) {
+        cout << "Checking word: " << word << endl;
+        if (are_words_equal(word, target_word)) {
+            cout << "word found: " << word << endl;
+            return word;
+        }
+    }
+    return NULL;
 }
