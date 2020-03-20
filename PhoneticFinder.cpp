@@ -5,7 +5,7 @@
 #include <list>
 #include <iostream>
 #include <algorithm>
-#include<bits/stdc++.h> 
+#include <bits/stdc++.h>
 
 using namespace std;
 
@@ -59,16 +59,19 @@ bool are_words_equal(string word1, string word2)
 
 string find(string target_word, string text)
 {
-    // making a string stream 
-    stringstream words_stream(text); 
+    // making a string stream
+    stringstream words_stream(text);
     string word;
-    // Read and print each word. 
-    while (words_stream >> word) {
-        cout << "Checking word: " << word << endl;
-        if (are_words_equal(word, target_word)) {
+    // Read and print each word.
+    cout << "Checking word: " << target_word << endl;
+
+    while (words_stream >> word)
+    {
+        if (are_words_equal(word, target_word))
+        {
             cout << "word found: " << word << endl;
             return word;
         }
     }
-    return NULL;
+    throw std::invalid_argument("word not found!");
 }
