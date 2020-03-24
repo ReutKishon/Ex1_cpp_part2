@@ -1,11 +1,10 @@
 #ifndef PHONETICFINDER_H_
 #define PHONETICFINDER_H_
-
 #include <string>
-using namespace std;
 
-string find(string word, string text);
-
-
+namespace phonetic
+{
+std::string find( std::string text, std::string word);
+}
 
 #endif

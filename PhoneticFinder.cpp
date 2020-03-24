@@ -1,4 +1,3 @@
-#include "PhoneticFinder.hpp"
 #include <cctype>
 #include <string>
 #include <vector>
@@ -7,7 +6,30 @@
 #include <algorithm>
 #include <bits/stdc++.h>
 
+#include "PhoneticFinder.hpp"
+
 using namespace std;
+
+struct NoWordFoundException : public exception
+{
+private:
+    string target_word;
+    string *result_str;
+
+public:
+    NoWordFoundException(string word) : result_str(new string("Did not find the word '" + word + "' in the text"))
+    {
+    }
+    const char *what() const throw()
+    {
+        return this->result_str->c_str();
+    }
+
+    ~NoWordFoundException()
+    {
+        delete this->result_str;
+    }
+};
 
 vector<list<char>> letter_groups = {
     {'v', 'w'},
@@ -57,21 +79,27 @@ bool are_words_equal(string word1, string word2)
     return true;
 }
 
-string find(string target_word, string text)
+namespace phonetic
+{
+string find(string text, string target_word)
 {
     // making a string stream
     stringstream words_stream(text);
     string word;
+
     // Read and print each word.
-    cout << "Checking word: " << target_word << endl;
+    // cout << "Checking word: " << target_word << endl;
 
     while (words_stream >> word)
     {
         if (are_words_equal(word, target_word))
         {
-            cout << "word found: " << word << endl;
+            // cout << "word found: " << word << endl;
             return word;
         }
     }
-    throw std::invalid_argument("word not found!");
+
+    throw NoWordFoundException(target_word);
 }
+
+} // namespace phonetic
