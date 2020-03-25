@@ -57,8 +57,8 @@ bool are_letters_equal(char a, char b)
     for (auto &group : letter_groups)
     {
         // Check if iterator points to end or not
-        if (find(group.begin(), group.end(), a) != group.end() &&
-            find(group.begin(), group.end(), b) != group.end())
+        if (find(group.begin(), group.end(), tolower(a)) != group.end() &&
+            find(group.begin(), group.end(), tolower(b)) != group.end())
         {
             return true;
         }

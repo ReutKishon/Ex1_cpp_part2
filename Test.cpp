@@ -241,31 +241,32 @@ TEST_CASE("Test replacement of lower-case and upper-case and replacement of p an
 // TEST_CASE("Test shorter word that is contained in a word in the text with upper case:")
 // { //fails
 //     string text = "Smile xxx yyy";
-//     CHECK(find(text, "SMIL") == string("Happi"));
-//     CHECK(find(text, "SMI") == string("Happi"));
-//     CHECK(find(text, "SM") == string("Happi"));
-//     CHECK(find(text, "S") == string("Happi"));
+//     CHECK(find(text, string("SMIL")).compare(string("Happi")) == 0);
+//     CHECK(find(text, string("SMI")).compare(string("Happi")) == 0);
+//     CHECK(find(text, string("SM")).compare(string("Happi")) == 0);
+//     CHECK(find(text, string("S")).compare(string("Happi")) == 0);
 // }
 
 // TEST_CASE("Test shorter word that is contained in a word in the text:")
 // { //fails
 //     string text = "phsyco xxx yyy";
-//     CHECK(find(text, "phsyc") == string("compute"));
-//     CHECK(find(text, "phsy") == string("compute"));
-//     CHECK(find(text, "phs") == string("compute"));
-//     CHECK(find(text, "ph") == string("compute"));
-//     CHECK(find(text, "p") == string("compute"));
-//     CHECK(find(text, "h") == string("compute"));
-//     CHECK(find(text, "") == string("compute"));
+//     CHECK(find(text, string("phsyc")).compare(string("compute")) == 0);
+//     CHECK(find(text, string("phsy")).compare(string("compute")) == 0);
+//     CHECK(find(text, string("phs")).compare(string("compute")) == 0);
+//     CHECK(find(text, string("ph")).compare(string("compute")) == 0);
+//     CHECK(find(text, string("p")).compare(string("compute")) == 0);
+//     CHECK(find(text, string("h")).compare(string("compute")) == 0);
+//     CHECK(find(text, string("")).compare(string("compute")) == 0);
 // }
 
-// TEST_CASE("Test PhoneticFind -> More than one spelling error")
-// {
-//     CHECK(find(string("dog"), string("Y luwe tuj bor sure")) == string("tuj"));
-//     CHECK(find(string("for"), string("Y luwe tuj bor sure")) == string("bor"));
-//     CHECK(find(string("love"), string("Y luwe tuj bor sure")) == string("luwe"));
-//     CHECK(find(string("i"), string("Y luwe tuj bor sure")) == string("luwe"));
-// }
+TEST_CASE("Test PhoneticFind -> More than one spelling error")
+{
+    string text = "Y luwe tuj bor sure";
+    CHECK(find(text, string("dog")).compare(string("tuj")) == 0);
+    CHECK(find(text, string("for")).compare(string("bor")) == 0);
+    CHECK(find(text, string("love")).compare(string("luwe")) == 0);
+    CHECK(find(text, string("i")).compare(string("Y")) == 0);
+}
 
 // // TEST_CASE("Test PhoneticFind ->  Not Alaphbet letters")
 // // {
@@ -289,23 +290,17 @@ TEST_CASE("Test replacement of lower-case and upper-case and replacement of p an
 // //     CHECK(find(string("all"), text).compare(string("all")) == 0);
 // // }
 
-// TEST_CASE("Test PhoneticFind -> Word not found")
-// {
-//     string text = "live laugh love";
-//     CHECK(find(string("hi"), text).compare(NULL) == 0);
-//     CHECK(find(string("bye"), text).compare(string(NULL)) == 0);
-//     CHECK(find(string("lime"), text).compare(string(NULL)) == 0);
-//     CHECK(find(string("lode"), text).compare(string(NULL)) == 0);
-//     CHECK(find(string("lauke"), text).compare(string(NULL)) == 0);
-//     CHECK(find(string("bive"), text).compare(string(NULL)) == 0);
-//     CHECK(find(string("the"), text).compare(string(NULL)) == 0);
-//     CHECK(find(string("word"), text).compare(string(NULL)) == 0);
-//     CHECK(find(string("not"), text).compare(string(NULL)) == 0);
-//     CHECK(find(string("found"), text).compare(string(NULL)) == 0);
+// TEST_CASE("Test not equals")
+// { //fails
+//     string text = "very xxx yyy";
+//     CHECK(find(text, "cery") == string("very"));
+//     CHECK(find(text, "veryy") == string("very"));
+//     CHECK(find(text, "veery") == string("very"));
+//     CHECK(find(text, "ver") == string("very"));
 // }
 
-// TEST_CASE("Test PhoneticFind -> if the string is NULL")
+// TEST_CASE("Test PhoneticFind -> if the string is empy")
 // {
 //     string text = " ";
-//     CHECK(find(string(" "), text).compare(" ") == 0);
+//     CHECK(find(text,string("love") ).compare("love") == 0); //fail
 // }
