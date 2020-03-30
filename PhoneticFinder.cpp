@@ -1,5 +1,8 @@
+//Student: Reut Keyshawn
+
 #include <cctype>
 #include <string>
+#include <locale>
 #include <vector>
 #include <list>
 #include <iostream>
@@ -67,12 +70,25 @@ bool are_letters_equal(char a, char b)
     return false;
 }
 
+string trim(const string& str)
+{
+    size_t first = str.find_first_not_of(' ');
+    if (string::npos == first)
+    {
+        return str;
+    }
+    size_t last = str.find_last_not_of(' ');
+    return str.substr(first, (last - first + 1));
+}
+
+
 bool are_words_equal(string word1, string word2)
 {
     if (word1.length() != word2.length())
         return false;
     for (auto i = 0; i < word1.length(); i++)
     {
+
         if (!are_letters_equal(word1[i], word2[i]))
             return false;
     }
@@ -88,13 +104,13 @@ string find(string text, string target_word)
     string word;
 
     // Read and print each word.
-    // cout << "Checking word: " << target_word << endl;
+    cout << "Checking word: " << target_word << endl;
 
     while (words_stream >> word)
     {
-        if (are_words_equal(word, target_word))
+        if (are_words_equal(trim(word), trim(target_word)))
         {
-            // cout << "word found: " << word << endl;
+            cout << "word found: " << word << endl;
             return word;
         }
     }
